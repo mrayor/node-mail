@@ -13,16 +13,18 @@ const mailer = nodemailer.createTransport({
 });
 
 exports.sendEmail = async (req, res) => {
-    const { secret, password } = req.body;
+    const { name, email, category, message } = req.body;
 
     const options = {
         from: process.env.SEND_FROM,
         to: process.env.SEND_TO,
-        subject: "New Submission",
+        subject: "New Contact Email",
         html: `<div>
-                <h3>New Submission</h3>
-                <p>Secret:  <span style="font-weight:bold">${secret || '-'}</span></p>
-                <p>Password:  <span style="font-weight:bold">${password || '-'}</span></p>
+                <h3>New Email</h3>
+                <p>Name:  <span style="font-weight:bold">${name || '-'}</span></p>
+                <p>Email:  <span style="font-weight:bold">${email || '-'}</span></p>
+                <p>Category:  <span style="font-weight:bold">${category || '-'}</span></p>
+                <p>Message:  <span style="font-weight:bold">${message || '-'}</span></p>
                 </div>
             `,
     };
